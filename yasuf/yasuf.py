@@ -88,7 +88,10 @@ class Yasuf:
 
         logger.info('Synchronizing time')
         response = self._send_message('Hello!')
-        self.start_time = float(response['ts'])
+        if not response['ok']:
+            raise Exception(response['error'])
+        else:
+            self.start_time = float(response['ts'])
 
     def _say_bye(self):
         """ Notify user that Yasuf is quiting. """
