@@ -17,10 +17,10 @@ Controlling this function is as simple as decorating it with the `yasuf.handle` 
 ```
 from yasuf import Yasuf
 
-yasuf = Yasuf('slack-token')
+yasuf = Yasuf('slack-token', channel='#general')
 ```
 
-You can get your token [here](https://api.slack.com/docs/oauth-test-tokens).
+The first argument is your token which you can get [here](https://api.slack.com/docs/oauth-test-tokens) and `channel` specifies which channel Yasuf should be listening to.
 
 ```
 @yasuf.handle('Say hello ([0-9]+) times!', channel='#general', types=[int])
@@ -28,7 +28,7 @@ def say_hello(count):
     (...)
 ```
 
-The first argument of `handle` specifies the regexp that the function should respond to, where each capture group corresponds to one argument of the decorated function, `channel` specifies which channel it should be listening to and `types` is a list of functions that will be applied to the captured arguments to convert them from string to whatever the decorated function expects.
+The first argument of `handle` specifies the regexp that the function should respond to, where each capture group corresponds to one argument of the decorated function and `types` is a list of functions that will be applied to the captured arguments to convert them from string to whatever the decorated function expects.
 
 Now you can run (or run_async).
 
