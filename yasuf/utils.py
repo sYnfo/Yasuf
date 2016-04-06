@@ -14,7 +14,10 @@ def _redirect_output(f, capture_stdout=True, capture_return=True):
         old_stdout = sys.stdout
         sys.stdout = captured_stdout
 
-        ret_val = f(*params, **kwargs)
+        try:
+            ret_val = f(*params, **kwargs)
+        except Exception as e:
+            raise YasufRuntimeException(repr(e))
 
         sys.stdout = old_stdout
         captured_stdout.seek(0)

@@ -50,7 +50,7 @@ class Yasuf:
             try:
                 stdout, ret_val = fun.execute(match.groups())
             except YasufRuntimeException as e:
-                output = 'Encountered an exception: {}'.format(str(e))
+                output = 'Encountered an exception: {}'.format(e)
             else:
                 output = ''
                 if fun.capture_stdout:
