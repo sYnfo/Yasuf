@@ -15,11 +15,13 @@ logger.setLevel(logging.INFO)
 
 
 class Yasuf:
-    def __init__(self, token, channel='#general', username='Yasuf'):
+    def __init__(self, token, channel='#general', username='Yasuf', debug=False):
         self.sc = SlackClient(token)
         self.channel = channel
         self.username = username
         self.start_time = None
+        if debug:
+            logger.setLevel(logging.DEBUG)
 
     def run_async(self):
         """ Creates a thread that monitors Slack messages and returns """
@@ -69,6 +71,7 @@ class Yasuf:
         while True:
             message = self.sc.rtm_read()
             if message and float(message[0].get('ts', 0)) > self.start_time:
+                logger.debug('Yielding message "{0}"'.format(message))
                 yield message[0]
 
     def _send_message(self, text, channel=None, **kwargs):
@@ -92,6 +95,7 @@ class Yasuf:
             raise Exception(response['error'])
         else:
             self.start_time = float(response['ts'])
+        logger.debug('Time synchronized at {0}'.format(self.start_time))
 
     def _say_bye(self):
         """ Notify user that Yasuf is quiting. """
@@ -112,6 +116,8 @@ class Yasuf:
             self.__name__ = f.__name__
             self.__doc__ = f.__doc__
 
+            logger.debug('Adding trigger "{0}" for function "{1}"'.format(self.regexp.pattern,
+                                                                          self.__name__))
             _handlers[self.regexp] = self
 
             return f
@@ -122,6 +128,8 @@ class Yasuf:
                 params = [t(g) for t, g in zip(self.types, groups)]
             else:
                 params = groups
+            logger.debug('Executing "{0}" with params "{1}"'.format(self.__name__,
+                                                                    params))
             return self.fun(*params)
 
 @Yasuf.handle('help ?([a-zA-Z0-9_-]+)?', capture_return=False)
