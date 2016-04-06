@@ -124,7 +124,7 @@ class Yasuf:
                 params = groups
             return self.fun(*params)
 
-@Yasuf.handle('help ?([a-zA-Z0-9_-]+)?', channel='all', capture_return=False)
+@Yasuf.handle('help ?([a-zA-Z0-9_-]+)?', capture_return=False)
 def print_help(function=None):
     """ Default handler for help command:
         * "help" prints out a list of all handled functions

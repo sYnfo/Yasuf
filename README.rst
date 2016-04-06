@@ -20,10 +20,10 @@ from yasuf import Yasuf
 yasuf = Yasuf('slack-token', channel='#general')
 ```
 
-The first argument is your token which you can get [here](https://api.slack.com/docs/oauth-test-tokens) and `channel` specifies which channel Yasuf should be listening to.
+The first argument is your token which you can get [here](https://api.slack.com/docs/oauth-test-tokens) and `channel` specifies the default channel Yasuf will be listening to.
 
 ```
-@yasuf.handle('Say hello ([0-9]+) times!', channel='#general', types=[int])
+@yasuf.handle('Say hello ([0-9]+) times!', types=[int])
 def say_hello(count):
     (...)
 ```
