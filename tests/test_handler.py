@@ -13,10 +13,8 @@ def say_hey():
 
 def test_handle():
     assert len(_handlers) == 2
-    handler = _handlers.items()[0]
-    assert len(handler) == 2
-    regexp = handler[0]
-    assert regexp.pattern == 'test'
+    patterns = [r.pattern for r in _handlers]
+    assert 'test' in patterns
 
 def test_default_channel():
     assert y.channel == '#general'

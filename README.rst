@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sYnfo/Yasuf.svg?branch=master)](https://travis-ci.org/sYnfo/Yasuf)
+
 # Yasuf — Yet Another Slack, Ummm, Framework
 Very simple way of controlling your Python application via Slack.
 
