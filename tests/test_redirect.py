@@ -18,4 +18,4 @@ def test_redirect_exception():
     try:
         output = redirected_f()
     except YasufRuntimeException as e:
-        assert e.message == "Exception('Test Exception',)"
+        assert str(e) == "Exception('Test Exception',)"
