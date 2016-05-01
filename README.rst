@@ -41,4 +41,6 @@ yasuf.run()
 From now on whenever you type `Say hello 3 times!` Yasuf will response with a couple hellos. Or you can ask Yasuf what he knows with the built-in function 'help'.
 
 ## Installation
-```python3 -m pip install --user yasuf```
+Python 2 and Python3 are supported.
+
+```python -m pip install --user yasuf```
