@@ -141,6 +141,9 @@ def print_help(function=None):
         * "help <function name>" prints out doc text of a function """
 
     if function is None:
+        if len(_handlers) == 1:
+            print('No handlers specified! :(')
+            return
         for trigger, handler in _handlers.items():
             if handler.__name__ == 'print_help':
                 continue
