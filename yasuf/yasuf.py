@@ -1,6 +1,7 @@
 import re
 import atexit
 import logging
+import time
 from threading import Thread
 
 from slackclient import SlackClient 
@@ -73,6 +74,7 @@ class Yasuf:
             if message and float(message[0].get('ts', 0)) > self.start_time:
                 logger.debug('Yielding message "{0}"'.format(message))
                 yield message[0]
+            time.sleep(.1)
 
     def _send_message(self, text, channel=None, **kwargs):
         """ Sends a message to Slack. Channel defaults to Yasuf's default
