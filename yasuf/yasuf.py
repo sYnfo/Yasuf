@@ -39,9 +39,9 @@ class Yasuf:
         self.sc.rtm_connect()
         self._synchronize_time()
         for message in self._get_message():
-            if message.get('type') == 'message':
+            if message.get('type') == 'message' and 'text' in message:
                 for trigger, fun in _handlers.items():
-                    match = trigger.match(message.get('text'))
+                    match = trigger.match(message['text'])
                     if match:
                         self._send_message('Executing {} with '\
                                            'arguments {}:'.format(fun.__name__,
